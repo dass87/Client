@@ -89,7 +89,7 @@ public class RestClient {
             WebTarget myResource = client.target("http://localhost:8080/TD-Pets/api/pets");
             Pett pet = myResource.request(MediaType.APPLICATION_JSON).post(Entity.json(pet1), Pett.class);
 
-            System.out.println("YouÂ´ve created a Pet with name: " + x);
+            System.out.println("You´ve created a Pet with name: " + x);
 
         } else if (choose == 4) {
             String ids;
