@@ -8,10 +8,6 @@ package pt.tripdashboard.pets;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -93,7 +89,7 @@ public class RestClient {
             WebTarget myResource = client.target("http://localhost:8080/TD-Pets/api/pets");
             Pett pet = myResource.request(MediaType.APPLICATION_JSON).post(Entity.json(pet1), Pett.class);
 
-            System.out.println("You´ve created a Pet with name: " + x);
+            System.out.println("YouÂ´ve created a Pet with name: " + x);
 
         } else if (choose == 4) {
             String ids;
@@ -112,7 +108,7 @@ public class RestClient {
             Pett response = myResource.request(MediaType.APPLICATION_JSON)
                     .delete(Pett.class);
 
-            System.out.println("You´ve deleted a Pet");
+            System.out.println("YouÂ´ve deleted a Pet");
         }
         return 0;
     }
