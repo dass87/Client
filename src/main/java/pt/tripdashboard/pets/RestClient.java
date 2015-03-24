@@ -32,7 +32,8 @@ public class RestClient {
         String pet;
         int choose;
 
-        System.out.println("Do you want to see a list of Pets, one Pet by ID or even create a Pet? \n Type: \n 1 to see the list \n 2 to see the Pet \n 3 to create one Pet.");
+        System.out.println("Do you want to see, create or delete a Pet? "
+                + "\n Type: \n 1 to see the list. \n 2 to see one Pet. \n 3 to create one Pet. \n 4 to delete one Pet.");
         InputStreamReader str = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(str);
         pet = br.readLine();
@@ -54,7 +55,7 @@ public class RestClient {
                     });
 
             System.out.println(pets);
-            
+
         } else if (choose == 2) {
             String ids;
             int id;
@@ -87,14 +88,31 @@ public class RestClient {
             x = bR.readLine();
             pet1.setName(x);
 
+            /* POST a Pet*/
             Client client = ClientBuilder.newClient();
             WebTarget myResource = client.target("http://localhost:8080/TD-Pets/api/pets");
             Pett pet = myResource.request(MediaType.APPLICATION_JSON).post(Entity.json(pet1), Pett.class);
-            
+
             System.out.println("You´ve created a Pet with name: " + x);
 
-        } else {
-            System.out.println("Wrong choose!");
+        } else if (choose == 4) {
+            String ids;
+            int id;
+
+            System.out.println("Type the ID that you want to delete");
+            InputStreamReader str = new InputStreamReader(System.in);
+            BufferedReader bR = new BufferedReader(str);
+            ids = bR.readLine();
+
+            id = Integer.valueOf(ids);
+
+            /* DELETE a Pet by ID*/
+            Client client = ClientBuilder.newClient();
+            WebTarget myResource = client.target("http://localhost:8080/TD-Pets/api/pets/" + id);
+            Pett response = myResource.request(MediaType.APPLICATION_JSON)
+                    .delete(Pett.class);
+
+            System.out.println("You´ve deleted a Pet");
         }
         return 0;
     }
